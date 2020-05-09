@@ -18,26 +18,14 @@ class Slack
 	}
 
 	public static function settings($key) {
-		if (static::$_settings === null) {
-			$settings = [
-				'channel' => '#general',
-				'username' => 'cakephp',
-				'icon_emoji' => ':ghost:',
-			];
-
-			static::$_settings = array_merge($settings, Configure::read('Slack'));
-		}
-		return static::$_settings[$key];
+		return Configure::read('Slack')[$key];
 	}
 
 	public static function send($message)
 	{
 		$client = static::_getClient();
 		$payload = [
-			'channel' => static::settings('channel'),
-			'username' => static::settings('username'),
 			'text' => $message,
-			'icon_emoji' => static::settings('icon_emoji'),
 		];
 
 		$token = static::settings('token');
@@ -49,7 +37,7 @@ class Slack
 		];
 
 		$response = $client->post($uri, json_encode($payload), $request);
-		if ($response->code !== 200 || $response->body !== 'ok') {
+		if ($response->code !== '200' || $response->body !== 'ok') {
 			return false;
 		}
 
