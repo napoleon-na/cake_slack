@@ -8,9 +8,6 @@
 ```
 Configure::write('Slack', [
     'token' => 'Your access token', // 'XXXXXXXXX/YYYYYYYYY/zzzzzzzzzzzzzzzzzzzzzzzz'
-    'channel' => '#generic',		// default
-    'username' => 'cakephp',		// default
-    'icon_emoji' => ':ghost:',	// default
 ]);
 ```
 ### How to use
